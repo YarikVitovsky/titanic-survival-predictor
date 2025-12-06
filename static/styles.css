@@ -276,6 +276,56 @@ body {
     font-size: 1.1rem;
     color: #5d6d7e;
     line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.prediction-details {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #34495e;
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(52, 73, 94, 0.1);
+    color: #2c3e50;
+}
+
+.confidence-high {
+    background: rgba(39, 174, 96, 0.2) !important;
+    color: #27ae60 !important;
+}
+
+.confidence-medium {
+    background: rgba(243, 156, 18, 0.2) !important;
+    color: #f39c12 !important;
+}
+
+.confidence-low {
+    background: rgba(231, 76, 60, 0.2) !important;
+    color: #e74c3c !important;
 }
 
 @media (max-width: 768px) {

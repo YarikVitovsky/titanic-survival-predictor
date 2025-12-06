@@ -102,6 +102,16 @@
                 <div id="result-icon"></div>
                 <h2 id="result-text"></h2>
                 <p id="result-message"></p>
+                <div id="prediction-details" class="prediction-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Survival Probability:</span>
+                        <span id="probability-value" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Confidence Level:</span>
+                        <span id="confidence-value" class="detail-value"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -148,6 +158,8 @@
                     const resultIcon = document.getElementById('result-icon');
                     const resultText = document.getElementById('result-text');
                     const resultMessage = document.getElementById('result-message');
+                    const probabilityValue = document.getElementById('probability-value');
+                    const confidenceValue = document.getElementById('confidence-value');
 
                     // Clear previous results
                     resultContainer.style.display = 'none';
@@ -174,6 +186,15 @@
                         resultText.textContent = 'Unknown Result';
                         resultMessage.textContent = 'Result: ' + (data.result || 'No result');
                         resultContainer.className = 'result-container error';
+                    }
+
+                    // Update prediction details if available
+                    if (data.probability) {
+                        probabilityValue.textContent = data.probability;
+                    }
+                    if (data.confidence) {
+                        confidenceValue.textContent = data.confidence;
+                        confidenceValue.className = 'detail-value confidence-' + data.confidence.toLowerCase();
                     }
 
                     // Show the result with a delay for better UX

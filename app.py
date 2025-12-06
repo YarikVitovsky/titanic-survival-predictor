@@ -5,7 +5,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the trained model
-MODEL_PATH = 'model/realistic_model.pkl'
+MODEL_PATH = 'model/titanic_model.pkl'
 with open(MODEL_PATH, 'rb') as model_file:
     model = pickle.load(model_file)
 
@@ -35,13 +35,21 @@ def predict():
 
         # Make prediction
         prediction = model.predict(features)
+        prediction_proba = model.predict_proba(features)
+        survival_probability = prediction_proba[0][1]  # Probability of survival (class 1)
+        
         print(f"Prediction: {prediction}")
+        print(f"Survival Probability: {survival_probability:.2%}")
         
         result = 'Survived' if prediction[0] == 1 else 'Did not survive'
         
         print(f"Result: {result}")
 
-        return jsonify({'result': result})
+        return jsonify({
+            'result': result,
+            'probability': f"{survival_probability:.1%}",
+            'confidence': 'High' if abs(survival_probability - 0.5) > 0.3 else 'Medium' if abs(survival_probability - 0.5) > 0.15 else 'Low'
+        })
     except Exception as e:
         print(f"Error: {str(e)}")
         return jsonify({'error': str(e)}), 500
